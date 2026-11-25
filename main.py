@@ -62,14 +62,14 @@ def main():
     fig, ax = plt.subplots(figsize=(9, 5))
     ax.contour(xs, ys, zs, levels=25, cmap="Greys", alpha=0.6)
     for name, (path, _) in results.items():
-        ax.plot(path[:, 0], path[:, 1], "-o", ms=3, lw=1.5, label=name, color=colors[name])
+        ax.plot(path[:, 0], path[:, 1], "-", ms=3, lw=1.5, label=name, color=colors[name])
     ax.plot(0, 0, "*", ms=14, color="black")
     ax.set_xlabel(r"$\theta_0$")
     ax.set_ylabel(r"$\theta_1$")
     ax.set_title("Optimiser paths on the same loss surface")
     ax.legend()
     fig.tight_layout()
-    fig.savefig("paths.png", dpi=150)
+    fig.savefig("paths.png", dpi=500)
 
     # --- loss curves ---
     fig, ax = plt.subplots(figsize=(7, 4))
