@@ -1,6 +1,6 @@
 # Optimisers
 
-Gradient descent, Momentum and Adam implemented from scratch with pure NumPy. All three are run on the same poorly conditioned loss surface so the differences are easy to see.
+Gradient descent, Momentum and Adam implemented from scratch with NumPy. All three optimisers are run on the same poorly conditioned loss surface so the differences are easy to see. The picture below shows visualisation of ?.
 
 ![Paths](paths.png)
 

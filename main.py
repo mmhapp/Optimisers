@@ -66,7 +66,7 @@ def main():
     ax.plot(0, 0, "*", ms=14, color="black")
     ax.set_xlabel(r"$\theta_0$")
     ax.set_ylabel(r"$\theta_1$")
-    ax.set_title("Optimiser paths on the same loss surface")
+    # ax.set_title("Optimiser paths on the same loss surface")
     ax.legend()
     fig.tight_layout()
     fig.savefig("paths.png", dpi=500)
