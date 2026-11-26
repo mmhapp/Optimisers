@@ -1,10 +1,12 @@
-# Optimisers from Scratch
+# Optimisers
 
 Gradient descent, Momentum and Adam implemented from scratch with pure NumPy. All three are run on the same poorly conditioned loss surface so the differences are easy to see.
 
 ![Paths](paths.png)
 
-## How this relates to real AI models
+---
+
+## Relation to AI
 
 Every neural network — from a small CNN classifying images to a multi-billion-parameter language model — is trained by repeatedly taking optimiser steps.  
 Adam (and its variants AdamW, Lion, …) is the default optimiser in virtually all modern training runs of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum / adaptive scaling help, is foundational to training any deep model successfully.
