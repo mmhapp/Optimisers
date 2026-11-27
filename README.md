@@ -1,6 +1,6 @@
 # Optimisers
 
-Gradient descent, Momentum and Adam implemented from scratch with NumPy. All three optimisers are run on the same poorly conditioned loss surface so the differences are easy to see. The picture below shows visualisation of how the optimisers move across the surface towards the minimum of the loss $L(\theta)$. Gradient descent is stable, but progress in the flat direction is slow. Momentum is faster, but overshoots the optimum and oscillates. Adam is fast because step size adapts per parameter; slight overshoot then quick settling.
+Gradient descent, Momentum and Adam implemented from scratch with NumPy. All three optimisers are run on the same poorly conditioned loss surface so the differences are easy to see. The picture below shows visualisation of how the optimisers move across the surface towards the minimum of the loss $L(\theta)$. The model has two parameters, $\theta = (\theta_0, \theta_1)$, which form the horizontal and vertical axes of the picture. Each point in the plane is one choice of parameter values, and the contour lines connect points with the same loss, so the loss is lowest at the centre of the ellipses. Contours are close together along the steep direction and far apart along the flat direction. Every optimiser starts from the same initial point, and its path shows how $(\theta_0, \theta_1)$ changes after each step. Gradient descent is stable, but progress in the flat direction is slow. Momentum is faster, but overshoots the optimum and oscillates. Adam is fast because step size adapts per parameter; slight overshoot then quick settling.
 
 ![Paths](paths.png)
 
@@ -8,20 +8,20 @@ Gradient descent, Momentum and Adam implemented from scratch with NumPy. All thr
 
 ## Relation to Artificial Intelligence
 
-Every neural network — from a small CNN classifying images to a multi-billion-parameter language model — is trained by repeatedly taking optimiser steps. Adam (and its variants AdamW, Lion, …) is the default optimiser in virtually all modern training runs of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum / adaptive scaling help, is foundational to training any deep model successfully.
+Every neural network — from a small CNN classifying images to a multi-billion-parameter large language model — is trained by repeatedly taking optimiser steps. Adam (and its variants AdamW, Lion) is the default optimiser in virtually all modern training runs of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum / adaptive scaling help, is foundational to training any deep model successfully.
 
 ## Running
 
 ```bash
 pip install -r requirements.txt
-python main.py        # prints final losses, saves paths.png and loss_curves.png
+python main.py
 ```
 
 ## Mathematics
 
-Training is an optimisation problem: find parameters $\theta$ that minimise a loss $L(\theta)$.
+Training is an optimisation problem: find parameters $\theta=(\theta_0,\theta_1)$ that minimise a loss $L(\theta)$.
 
-1. Gradient descent
+<ins>1. Gradient descent</ins>
 
 The gradient $\nabla_\theta L$ points in the direction of steepest ascent, so we step in the opposite direction as
 
@@ -35,7 +35,7 @@ $\eta < \frac{2}{b}$.
 
 But then in the flat direction the factor is $1-\eta a \approx 1$ and progress is slow. The condition number $\kappa = b/a$ quantifies how bad the situation is. In this demo $\kappa = 100$.
 
-2. Momentum
+<ins>2. Momentum</ins>
 
 We accumulate a velocity that remembers previous gradients as
 
@@ -51,7 +51,7 @@ $\eta\,\sum_{k\ge 0}\beta^k = \frac{\eta}{1-\beta}$,
 
 so $\beta = 0.9$ gives roughly a 10× larger step in the flat direction.
 
-3. Adam
+<ins>3. Adam</ins>
 
 Adam keeps running estimates of both the first moment (mean) and the second moment (uncentred variance) of the gradient as
 
@@ -69,6 +69,4 @@ Dividing by $\sqrt{\hat v_t}$ normalises the step size of every parameter indivi
 
 ## References
 
-- Kingma & Ba (2015), *Adam: A Method for Stochastic Optimization*
-- Goh (2017), *Why Momentum Really Works*, Distill
-- Dive into Deep Learning, Chapter 12 (Optimization Algorithms)
+Zhang, A., Lipton, Z. C., Li, M. & Smola, A. J. (2023). “Optimization Algorithms” [Chapter 9]. Dive into Deep Learning. Available at: https://d2l.ai/chapter_optimization/
