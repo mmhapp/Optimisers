@@ -1,6 +1,6 @@
 # Optimisers
 
-Gradient descent, Momentum and Adam implemented from scratch with NumPy. All three optimisers are run on the same poorly conditioned loss surface so the differences are easy to see. The picture below shows visualisation of how the optimisers move across the surface towards the minimum of the loss $L(\theta)$. The model has two parameters, $\theta = (\theta_0, \theta_1)$, which form the horizontal and vertical axes of the picture. Each point in the plane is one choice of parameter values, and the contour lines connect points with the same loss, so the loss is lowest at the centre of the ellipses. Contours are close together along the steep direction and far apart along the flat direction. Every optimiser starts from the same initial point, and its path shows how $(\theta_0, \theta_1)$ changes after each step. Gradient descent is stable, but progress in the flat direction is slow. Momentum is faster, but overshoots the optimum and oscillates. Adam is fast because step size adapts per parameter; slight overshoot then quick settling.
+Gradient descent, Momentum and Adam implemented from scratch with NumPy. All three optimisers are run on the same poorly conditioned loss surface so the differences are easy to see. The picture below shows visualisation of how the optimisers move across the surface towards the minimum of the loss $L(\theta)$. The model has two parameters, $\theta = (\theta_0, \theta_1)$, which form the horizontal and vertical axes of the picture. Each point in the plane is one choice of parameter values, and the contour lines connect points with the same loss, so the loss is lowest at the centre of the ellipses. Contours are close together along the steep direction and far apart along the flat direction. Every optimiser starts from the same initial point, and its path shows how $(\theta_0, \theta_1)$ changes after each step. Gradient descent is stable, but progress in the flat direction is slow. Momentum is faster, but overshoots the optimum and oscillates. Adam is fast because step size adapts per parameter; slight overshoot then quick settling. Star shows the optimised value.
 
 ![Paths](paths.png)
 
@@ -8,14 +8,7 @@ Gradient descent, Momentum and Adam implemented from scratch with NumPy. All thr
 
 ## Relation to Artificial Intelligence
 
-Every neural network — from a small CNN classifying images to a multi-billion-parameter large language model — is trained by repeatedly taking optimiser steps. Adam (and its variants AdamW, Lion) is the default optimiser in virtually all modern training runs of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum / adaptive scaling help, is foundational to training any deep model successfully.
-
-## Running
-
-```bash
-pip install -r requirements.txt
-python main.py
-```
+Every neural network — from a small CNN classifying images to a multi-billion-parameter large language model — is trained by repeatedly taking optimiser steps. Adam (and its variants AdamW, Lion) is the default optimiser in virtually all modern training runs of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum / adaptive scaling help, is foundational to training any deep model successfully. When one calls `optimizer.step()` in PyTorch, the framework applies exactly the update rules derived in this project (gradient descent, momentum or Adam, e.g. `torch.optim.SGD` and `torch.optim.Adam`) to every parameter of the model, using the gradients that backpropagation has just computed.
 
 ## Mathematics
 
@@ -29,7 +22,7 @@ $\theta \leftarrow \theta - \eta\,\nabla_\theta L(\theta)$,
 
 where $\eta$ is the learning rate.
 
-**Why choosing $\eta$ is hard.** Consider the quadratic surface $L = \tfrac12(a x^2 + b y^2)$ with $a \ll b$. After one GD step the coordinates are multiplied by $(1-\eta a)$ and $(1-\eta b)$. For the steep direction not to explode we need $\lvert 1-\eta b\rvert < 1$, i.e.
+Why choosing $\eta$ is hard? Consider the quadratic surface $L = \tfrac12(a x^2 + b y^2)$ with $a \ll b$. After one GD step the coordinates are multiplied by $(1-\eta a)$ and $(1-\eta b)$. For the steep direction not to explode we need $\lvert 1-\eta b\rvert < 1$, i.e.
 
 $\eta < \frac{2}{b}$.
 
@@ -66,6 +59,13 @@ The update is
 $\theta \leftarrow \theta - \eta\,\frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon}$.
 
 Dividing by $\sqrt{\hat v_t}$ normalises the step size of every parameter individually: parameters that receive large gradients move cautiously, those with small gradients move more boldly. This is why Adam works well without having to hand-tune a learning rate for every direction.
+
+## Running
+
+```bash
+pip install -r requirements.txt
+python main.py
+```
 
 ## References
 
