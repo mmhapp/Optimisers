@@ -1,6 +1,6 @@
 # Optimisers
 
-Gradient descent, Momentum and Adam implemented from scratch with NumPy. All three optimisers are run on the same poorly conditioned loss surface so the differences are easy to see. The picture below shows visualisation of how the optimisers move across the surface towards the minimum of the loss $L(\theta)$. The model has two parameters, $\theta = (\theta_0, \theta_1)$, which form the horizontal and vertical axes of the picture. Each point in the plane is one choice of parameter values, and the contour lines connect points with the same loss, so the loss is lowest at the centre of the ellipses. Contours are close together along the steep direction and far apart along the flat direction. Every optimiser starts from the same initial point, and its path shows how $(\theta_0, \theta_1)$ changes after each step. Gradient descent is stable, but progress in the flat direction is slow. Momentum is faster, but overshoots the optimum and oscillates. Adam is fast because step size adapts per parameter; slight overshoot then quick settling. Star shows the optimised value.
+Gradient descent, Momentum and Adam implemented from scratch with NumPy and run on the same loss surface. The picture below shows how the optimisers move towards the minimum of the loss function $L(\theta)$, wehre $\theta=\theta_0,\theta_1$. The x-axis is for $\theta_0$ and the y-axis is for $\theta_1$, the contour lines connect points with the same loss, every optimiser starts from the same point, and the star marks the optimum. Gradient descent is stable, but slow in the flat direction. Momentum is faster, but overshoots and oscillates. Adam adapts the step size per parameter, with slight overshoot and quick settling.
 
 ![Paths](paths.png)
 
@@ -8,7 +8,7 @@ Gradient descent, Momentum and Adam implemented from scratch with NumPy. All thr
 
 ## Relation to Artificial Intelligence
 
-Every neural network — from a small CNN classifying images to a multi-billion-parameter large language model — is trained by repeatedly taking optimiser steps. Adam (and its variants AdamW, Lion) is the default optimiser in virtually all modern training runs of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum / adaptive scaling help, is foundational to training any deep model successfully. When one calls `optimizer.step()` in PyTorch, the framework applies exactly the update rules derived in this project (gradient descent, momentum or Adam, e.g. `torch.optim.SGD` and `torch.optim.Adam`) to every parameter of the model, using the gradients that backpropagation has just computed.
+Every neural network, from a small convolutional neural network (CNN) to a large language model (LLM), is trained by repeatedly taking optimiser steps. Adam is the default optimiser in virtually all modern training of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum and adaptive scaling help, is foundational to training any deep learning model. When one calls `optimizer.step()` in PyTorch, the framework applies the update rules derived here, e.g. `torch.optim.SGD` and `torch.optim.Adam`, using the gradients that backpropagation has just computed.
 
 ## Mathematics
 
@@ -66,6 +66,16 @@ Dividing by $\sqrt{\hat v_t}$ normalises the step size of every parameter indivi
 pip install -r requirements.txt
 python main.py
 ```
+
+## Project
+
+├── data/               # Benchmark datasets
+├── Results/            # Output directory for weights and predictions
+├── fm.py               # Main execution script
+├── fmloop.py           # Automated experiment runner
+├── settings.py         # Hyperparameter configurations
+└── statistics.pdf      # Visualisation and analysis
+
 
 ## References
 
