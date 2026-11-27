@@ -59,17 +59,17 @@ def main():
     # --- paths on the loss surface ---
     xs, ys = np.meshgrid(np.linspace(-5, 5, 300), np.linspace(-2, 2, 300))
     zs = 0.5 * (A * xs**2 + B * ys**2)
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots(figsize=(10, 5))
     ax.contour(xs, ys, zs, levels=25, cmap="Greys", alpha=0.6)
     for name, (path, _) in results.items():
         ax.plot(path[:, 0], path[:, 1], "-", ms=3, lw=1.5, label=name, color=colors[name])
-    ax.plot(0, 0, "*", ms=14, color="black")
+    ax.plot(0, 0, "*", ms=14, color="black", label="Global minimum")
     ax.set_xlabel(r"$\theta_0$")
     ax.set_ylabel(r"$\theta_1$")
     ax.set_title("Optimiser paths on the same loss surface")
     ax.legend()
     fig.tight_layout()
-    fig.savefig("paths.png", dpi=500)
+    fig.savefig("paths.png", dpi=500, bbox_inches="tight", pad_inches=0.01)
 
     # --- loss curves ---
     fig, ax = plt.subplots(figsize=(7, 4))
@@ -79,7 +79,7 @@ def main():
     ax.set_ylabel("loss (log)")
     ax.legend()
     fig.tight_layout()
-    fig.savefig("loss_curves.png", dpi=150)
+    fig.savefig("loss_curves.png", dpi=500)
 
     for name, (_, losses) in results.items():
         print(f"{name:18s} final loss = {losses[-1]:.3e}")
