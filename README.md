@@ -1,9 +1,10 @@
 # Optimisers
 
-Gradient descent, Momentum and Adam implemented from scratch with NumPy and run on the same loss surface. The picture below shows how the optimisers move towards the minimum of the loss function $L(\theta_0,\theta_1)$. The contour lines connect points with the same loss, every optimiser starts from the same point, and the star marks the optimum. Gradient descent is stable, but slow in the flat direction. Momentum is faster, but overshoots and oscillates. Adam adapts the step size per parameter, with slight overshoot and quick settling.
+Gradient descent, Momentum and Adam implemented from scratch with NumPy. All the optimisres run on the same loss surface. The picture below shows how the optimisers move towards the minimum of the loss function $L(\theta_0,\theta_1)$. The contour lines connect points with the same loss, every optimiser starts from the same point, and the star marks the optimum. Gradient descent is stable, but slow in the flat direction. Momentum is faster, but overshoots and oscillates. Adam adapts the step size per parameter, with slight overshoot and quick settling.
 
 <div align="center">
   <img src="paths.png" alt="paths" width="50%">
+
   <sub>Figure 1: xxx.</sub>
 </div>
 
