@@ -4,12 +4,13 @@ Loss surface: L(x, y) = 0.5 * (a * x^2 + b * y^2),  a << b.
 The surface is a narrow valley: steep in y, flat in x.
 Run:  python main.py   ->  saves paths.png and loss_curves.png
 """
+
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-
 from optimizers import GradientDescent, Momentum, Adam
+
 
 A, B = 0.05, 5.0  # Hessian eigenvalues -> condition number B/A = 100
 

@@ -2,6 +2,7 @@
 
 Each optimiser is a small class with a method step(theta, grad) -> new theta.
 """
+
 import numpy as np
 
 
