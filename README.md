@@ -1,14 +1,14 @@
 # Optimisers
 
-Gradient descent, Momentum and Adam implemented from scratch with NumPy and run on the same loss surface. The picture below shows how the optimisers move towards the minimum of the loss function $L(\theta)$, wehre $\theta=\theta_0,\theta_1$. The x-axis is for $\theta_0$ and the y-axis is for $\theta_1$, the contour lines connect points with the same loss, every optimiser starts from the same point, and the star marks the optimum. Gradient descent is stable, but slow in the flat direction. Momentum is faster, but overshoots and oscillates. Adam adapts the step size per parameter, with slight overshoot and quick settling.
+Gradient descent, Momentum and Adam implemented from scratch with NumPy and run on the same loss surface. The picture below shows how the optimisers move towards the minimum of the loss function $L(\theta)$, where $\theta=(\theta_0,\theta_1)$. The contour lines connect points with the same loss, every optimiser starts from the same point, and the star marks the optimum. Gradient descent is stable, but slow in the flat direction. Momentum is faster, but overshoots and oscillates. Adam adapts the step size per parameter, with slight overshoot and quick settling.
 
-![Paths](paths.png)
+<img src="paths.png" alt="Paths" width="50%">
 
 ---
 
 ## Relation to Artificial Intelligence
 
-Every neural network, from a small convolutional neural network (CNN) to a large language model (LLM), is trained by repeatedly taking optimiser steps. Adam is the default optimiser in virtually all modern training of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum and adaptive scaling help, is foundational to training any deep learning model. When one calls `optimizer.step()` in PyTorch, the framework applies the update rules derived here, e.g. `torch.optim.SGD` and `torch.optim.Adam`, using the gradients that backpropagation has just computed.
+Every neural network – from a small convolutional neural network (CNN) to a large language model (LLM) – is trained by repeatedly taking optimiser steps. Adam is the default optimiser in virtually all modern training of transformers, diffusion models and vision networks. Understanding why plain gradient descent struggles on ill-conditioned surfaces, and how momentum and adaptive scaling help, is foundational to training deep learning (DL) models. When one calls `optimizer.step()` in PyTorch, the framework applies the update rules `torch.optim.SGD` and `torch.optim.Adam`, using the gradients that backpropagation has just computed.
 
 ## Mathematics
 
@@ -69,13 +69,14 @@ python main.py
 
 ## Project
 
+```
 ├── data/               # Benchmark datasets
 ├── Results/            # Output directory for weights and predictions
 ├── fm.py               # Main execution script
 ├── fmloop.py           # Automated experiment runner
 ├── settings.py         # Hyperparameter configurations
 └── statistics.pdf      # Visualisation and analysis
-
+```
 
 ## References
 
