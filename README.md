@@ -13,11 +13,9 @@ Every neural network – from a small convolutional neural network (CNN) to a la
 
 ## Mathematics
 
-Training is an optimisation problem: find parameters $\theta=(\theta_0,\theta_1)$ that minimise a loss $L(\theta)$.
+<ins>Gradient descent</ins>
 
-<ins>1. Gradient descent</ins>
-
-The gradient $\nabla_\theta L$ points in the direction of steepest ascent, so we step in the opposite direction as
+Training is an optimisation problem: find parameters $\theta=(\theta_0,\theta_1)$ that minimise a loss $L(\theta)$. The gradient $\nabla_\theta L$ points in the direction of steepest ascent, so we step in the opposite direction as
 
 $\theta \leftarrow \theta - \eta\,\nabla_\theta L(\theta)$,
 
@@ -29,7 +27,7 @@ $\eta < \frac{2}{b}$.
 
 But then in the flat direction the factor is $1-\eta a \approx 1$ and progress is slow. The condition number $\kappa = b/a$ quantifies how bad the situation is. In this demo $\kappa = 100$.
 
-<ins>2. Momentum</ins>
+<ins>Momentum</ins>
 
 We accumulate a velocity that remembers previous gradients as
 
@@ -45,7 +43,7 @@ $\eta\,\sum_{k\ge 0}\beta^k = \frac{\eta}{1-\beta}$,
 
 so $\beta = 0.9$ gives roughly a 10× larger step in the flat direction.
 
-<ins>3. Adam</ins>
+<ins>Adam</ins>
 
 Adam keeps running estimates of both the first moment (mean) and the second moment (uncentred variance) of the gradient as
 
